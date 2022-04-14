@@ -1,0 +1,3 @@
+[submodule "aWsm"]
+	path = aWsm
+	url = https://github.com/gwsystems/aWsm

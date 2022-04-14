@@ -1,0 +1,4 @@
+*.awsm
+*.wasm
+*.bc
+*.ll
