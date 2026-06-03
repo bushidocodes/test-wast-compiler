@@ -25,7 +25,8 @@ WAT2WASM    ?= wat2wasm
 
 # `-flto` is what makes clang accept aWsm's .bc bitcode at link time;
 # `-fuse-ld=lld` swaps in LLD because GNU ld doesn't understand bitcode.
-CFLAGS      := -O3 -flto -fuse-ld=lld
+CFLAGS      := -O3 -flto
+LDFLAGS     := -flto -fuse-ld=lld
 
 # Default target triple for the bitcode aWsm produces. Without an explicit
 # --target the bitcode omits both the triple and the data layout, and LLD
@@ -85,7 +86,7 @@ $(AWSMCC):
 	$(LLVM_DIS) $< -o $@
 
 %.awsm: %.bc %.c $(RUNTIME_SOURCES)
-	$(CC) $(CFLAGS) $(RUNTIME_INCLUDES) -lm $^ -o $@
+	$(CC) $(CFLAGS) $(RUNTIME_INCLUDES) $(LDFLAGS) -lm $^ -o $@
 
 # ---------------------------------------------------------------------------
 # Docker — pinned Ubuntu 20.04 + LLVM 12 build environment.
