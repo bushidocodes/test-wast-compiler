@@ -6,7 +6,7 @@
 FROM ubuntu:20.04
 
 ARG LLVM_VERSION=12
-ARG RUST_VERSION=1.75.0
+ARG RUST_VERSION=1.87.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
