@@ -1,0 +1,37 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install wabt
+        run: sudo apt-get install -y wabt
+
+      - name: Validate WAT syntax
+        run: wat2wasm --validate armstrong.wat -o /dev/null
+
+      - name: Submodule integrity
+        run: |
+          git submodule update --init --recursive
+          test -f aWsm/Cargo.toml
+
+      - name: Makefile dry-run
+        run: |
+          set -o pipefail
+          make --dry-run build AWSMCC=aWsm/target/release/awsm 2>&1 | grep -v '^make'
+
+  full-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build Docker image (Ubuntu 20.04 + LLVM 12)
+        run: docker build -t awsm-build:latest .
+
+      - name: Run full pipeline (wat → wasm → LLVM → native → assert tests)
+        run: docker run --rm -v "$PWD:/workspace" awsm-build:latest make run
