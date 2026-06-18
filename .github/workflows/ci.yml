@@ -11,7 +11,7 @@ jobs:
         run: sudo apt-get install -y wabt
 
       - name: Validate WAT syntax
-        run: wat2wasm --validate armstrong.wat -o /dev/null
+        run: wat2wasm armstrong.wat -o /dev/null
 
       - name: Submodule integrity
         run: |
