@@ -3,7 +3,7 @@
 # aWsm is pinned to the LLVM 12 C API (via the gwsystems/llvm-rs `sfbase` fork),
 # and LLVM 12 has been dropped from apt.llvm.org for jammy/noble — so we build
 # on Ubuntu 20.04 (focal) where LLVM 12 is a first-class apt package.
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 
 ARG LLVM_VERSION=12
 ARG RUST_VERSION=1.87.0
