@@ -9,7 +9,7 @@ updates:
       # there but has been dropped from apt on jammy/noble/oracular and later.
       # Upgrading Ubuntu requires migrating off the LLVM 12 C API first.
       - dependency-name: "ubuntu"
-        update-types: ["version-update:semver-major"]
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
