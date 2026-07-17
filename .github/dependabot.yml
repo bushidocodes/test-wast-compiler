@@ -4,6 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 3
     ignore:
       # Ubuntu is pinned to 20.04 (focal): LLVM 12 is a first-class apt package
       # there but has been dropped from apt on jammy/noble/oracular and later.
@@ -14,3 +16,5 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 3
