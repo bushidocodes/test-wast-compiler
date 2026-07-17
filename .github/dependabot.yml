@@ -1,20 +1,26 @@
+---
 version: 2
 updates:
-  - package-ecosystem: "docker"
-    directory: "/"
+  - package-ecosystem: docker
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'monthly'
+    open-pull-requests-limit: 5
     cooldown:
-      default-days: 3
+      default-days: 7
     ignore:
-      # Ubuntu is pinned to 20.04 (focal): LLVM 12 is a first-class apt package
-      # there but has been dropped from apt on jammy/noble/oracular and later.
-      # Upgrading Ubuntu requires migrating off the LLVM 12 C API first.
-      - dependency-name: "ubuntu"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  - package-ecosystem: "github-actions"
-    directory: "/"
+      - dependency-name: ubuntu
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+  - package-ecosystem: github-actions
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'monthly'
+    open-pull-requests-limit: 1
+    groups:
+      github-actions:
+        patterns:
+          - '*'
     cooldown:
-      default-days: 3
+      default-days: 7
